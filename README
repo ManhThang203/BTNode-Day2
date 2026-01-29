@@ -1,0 +1,390 @@
+# Express API Project - REST API với Posts và Comments
+
+Dự án REST API đơn giản sử dụng Express.js và JSON Database để quản lý Posts và Comments.
+
+## 📋 Mục lục
+
+- [Yêu cầu hệ thống](#yêu-cầu-hệ-thống)
+- [Cài đặt](#cài-đặt)
+- [Cách chạy](#cách-chạy)
+- [API Endpoints](#api-endpoints)
+- [Cấu trúc thư mục](#cấu-trúc-thư-mục)
+- [Test API với Postman](#test-api-với-postman)
+
+---
+
+## 🔧 Yêu cầu hệ thống
+
+Trước khi bắt đầu, đảm bảo máy tính của bạn đã cài đặt:
+
+- **Node.js** phiên bản 14.x trở lên
+- **npm** (đi kèm với Node.js)
+- **Git** (để clone project)
+
+### Kiểm tra phiên bản:
+
+```bash
+node --version
+npm --version
+```
+
+Nếu chưa cài Node.js, tải tại: https://nodejs.org/
+
+---
+
+## 📦 Cài đặt
+
+### Bước 1: Clone hoặc tải project
+
+```bash
+# Nếu có Git repository
+git clone <your-repo-url>
+cd express-api-project
+
+# Hoặc tải ZIP và giải nén
+```
+
+### Bước 2: Cài đặt dependencies
+
+```bash
+npm install
+```
+
+Lệnh này sẽ cài đặt:
+- `express` - Framework web
+- `cors` - Xử lý CORS policy
+
+### Bước 3: Kiểm tra cài đặt
+
+```bash
+npm list --depth=0
+```
+
+Bạn sẽ thấy:
+```
+express-api-project@1.0.0
+├── cors@2.8.5
+└── express@4.18.2
+```
+
+---
+
+## 🚀 Cách chạy
+
+### Chạy server
+
+```bash
+node server.js
+```
+
+### Kết quả mong đợi:
+
+```
+Server is running on http://localhost:3000
+```
+
+### Kiểm tra server đã chạy:
+
+Mở trình duyệt và truy cập: http://localhost:3000/api/posts
+
+Hoặc dùng lệnh:
+
+```bash
+curl http://localhost:3000/api/posts
+```
+
+### Dừng server:
+
+Nhấn `Ctrl + C` trong terminal
+
+---
+
+## 📡 API Endpoints
+
+### Base URL
+
+```
+http://localhost:3000/api
+```
+
+### Posts API
+
+| Method | Endpoint | Description | Body |
+|--------|----------|-------------|------|
+| GET | `/posts` | Lấy tất cả posts | - |
+| GET | `/posts/:id` | Lấy 1 post theo ID | - |
+| POST | `/posts` | Tạo post mới | `{title, content}` |
+| PUT | `/posts/:id` | Cập nhật post | `{title, content}` |
+| DELETE | `/posts/:id` | Xóa post | - |
+
+### Comments API
+
+| Method | Endpoint | Description | Body |
+|--------|----------|-------------|------|
+| GET | `/comments` | Lấy tất cả comments | - |
+| GET | `/comments/:id` | Lấy 1 comment theo ID | - |
+| POST | `/comments` | Tạo comment mới | `{postId, content}` |
+| PUT | `/comments/:id` | Cập nhật comment | `{content}` |
+| DELETE | `/comments/:id` | Xóa comment | - |
+
+---
+
+## 📂 Cấu trúc thư mục
+
+```
+express-api-project/
+│
+├── server.js                   # File chính để chạy server
+│
+├── src/
+│   ├── routes/
+│   │   ├── index.js           # Mount tất cả routes
+│   │   ├── posts.route.js     # Routes cho posts
+│   │   └── comments.route.js  # Routes cho comments
+│   │
+│   ├── controllers/
+│   │   ├── post.controller.js    # Logic xử lý posts
+│   │   └── comment.controller.js # Logic xử lý comments
+│   │
+│   └── models/
+│       ├── post.model.js      # Model làm việc với posts DB
+│       └── comment.model.js   # Model làm việc với comments DB
+│
+├── utils/
+│   └── jsonDB.js              # Utility để đọc/ghi JSON file
+│
+├── db/                         # Thư mục chứa database (tự động tạo)
+│   ├── posts.json             # Dữ liệu posts
+│   └── comments.json          # Dữ liệu comments
+│
+├── .gitignore                 # Ignore files không cần commit
+├── package.json               # Thông tin project và dependencies
+├── package-lock.json          # Lock dependencies version
+└── README.md                  # File này
+```
+
+---
+
+## 🧪 Test API với Postman
+
+### 1. Tạo Post mới
+
+**Request:**
+```
+POST http://localhost:3000/api/posts
+Content-Type: application/json
+
+Body:
+{
+  "title": "Bài viết đầu tiên",
+  "content": "Nội dung bài viết"
+}
+```
+
+**Response (201):**
+```json
+{
+  "id": "1738157123456",
+  "title": "Bài viết đầu tiên",
+  "content": "Nội dung bài viết",
+  "createdAt": "2026-01-29T10:32:03.456Z"
+}
+```
+
+### 2. Lấy tất cả Posts
+
+**Request:**
+```
+GET http://localhost:3000/api/posts
+```
+
+**Response (200):**
+```json
+[
+  {
+    "id": "1738157123456",
+    "title": "Bài viết đầu tiên",
+    "content": "Nội dung bài viết",
+    "createdAt": "2026-01-29T10:32:03.456Z"
+  }
+]
+```
+
+### 3. Tạo Comment
+
+**Request:**
+```
+POST http://localhost:3000/api/comments
+Content-Type: application/json
+
+Body:
+{
+  "postId": "1738157123456",
+  "content": "Comment đầu tiên"
+}
+```
+
+**Response (201):**
+```json
+{
+  "id": "1738157234567",
+  "postId": "1738157123456",
+  "content": "Comment đầu tiên",
+  "createdAt": "2026-01-29T10:33:54.567Z"
+}
+```
+
+### 4. Cập nhật Post
+
+**Request:**
+```
+PUT http://localhost:3000/api/posts/1738157123456
+Content-Type: application/json
+
+Body:
+{
+  "title": "Tiêu đề đã cập nhật",
+  "content": "Nội dung đã cập nhật"
+}
+```
+
+**Response (200):**
+```json
+{
+  "id": "1738157123456",
+  "title": "Tiêu đề đã cập nhật",
+  "content": "Nội dung đã cập nhật",
+  "createdAt": "2026-01-29T10:32:03.456Z"
+}
+```
+
+### 5. Xóa Post
+
+**Request:**
+```
+DELETE http://localhost:3000/api/posts/1738157123456
+```
+
+**Response (204):**
+```
+(No content)
+```
+
+---
+
+## ⚙️ CORS Configuration
+
+API đã được cấu hình CORS để cho phép requests từ:
+- `http://localhost:5173` (Vite dev server)
+- `https://[your-username].github.io` (GitHub Pages)
+
+Các HTTP methods được phép:
+- GET
+- POST
+- PUT
+- DELETE
+- OPTIONS
+
+---
+
+## 🐛 Xử lý lỗi
+
+### Lỗi: `Cannot find module 'express'`
+
+**Giải pháp:**
+```bash
+npm install express cors
+```
+
+### Lỗi: `Error: listen EADDRINUSE: address already in use :::3000`
+
+**Giải pháp:** Port 3000 đang được sử dụng. 
+
+**Tìm và kill process:**
+
+Mac/Linux:
+```bash
+lsof -ti:3000 | xargs kill -9
+```
+
+Windows:
+```cmd
+netstat -ano | findstr :3000
+taskkill /PID <PID> /F
+```
+
+Hoặc đổi port trong `server.js`:
+```javascript
+const PORT = 3001; // Đổi sang port khác
+```
+
+### Lỗi: `404 Not Found` khi gọi API
+
+**Kiểm tra:**
+1. Server đã chạy chưa?
+2. URL có đúng format không? `/api/posts` chứ không phải `/posts`
+3. Kiểm tra console log của server
+
+---
+
+## 📝 Lưu ý
+
+### Database tự động tạo
+
+- Thư mục `/db` và các file JSON sẽ **tự động tạo** khi bạn gọi API lần đầu
+- Không cần tạo thủ công
+
+### ID tự động
+
+- Mỗi post/comment được tạo sẽ có ID duy nhất dựa trên timestamp
+- Format: `"1738157123456"`
+
+### Dữ liệu lưu trữ
+
+- Dữ liệu được lưu trong file JSON tại thư mục `/db`
+- Khi xóa thư mục `/db`, tất cả dữ liệu sẽ mất
+- Đây chỉ là database đơn giản để học tập, không dùng cho production
+
+---
+
+## 🔄 Reset dữ liệu
+
+Nếu muốn xóa toàn bộ dữ liệu và bắt đầu lại:
+
+```bash
+# Xóa thư mục database
+rm -rf db
+
+# Hoặc trên Windows
+rmdir /s /q db
+```
+
+Khi chạy lại server và gọi API, database sẽ được tạo mới.
+
+---
+
+## 📚 Tài nguyên tham khảo
+
+- [Express.js Documentation](https://expressjs.com/)
+- [CORS Middleware](https://expressjs.com/en/resources/middleware/cors.html)
+- [Node.js File System](https://nodejs.org/docs/latest/api/fs.html)
+- [REST API Best Practices](https://restfulapi.net/)
+
+---
+
+## 👨‍💻 Tác giả
+
+[Manh Thang]
+
+## 📄 License
+
+ISC
+
+---
+
+## ❓ Hỗ trợ
+
+Nếu gặp vấn đề, vui lòng:
+1. Kiểm tra lại các bước cài đặt
+2. Đọc phần [Xử lý lỗi](#xử-lý-lỗi)
+3. Tạo issue trên GitHub repository
