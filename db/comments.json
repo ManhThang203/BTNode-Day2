@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1769697393710",
+    "postId": "1",
+    "content": "bài viết rất hay",
+    "createdAt": "2026-01-29T14:36:33.710Z"
+  },
+  {
+    "id": "1769697480404",
+    "postId": "2",
+    "content": "bài viết rất hay",
+    "createdAt": "2026-01-29T14:38:00.404Z"
+  },
+  {
+    "id": "1769697487735",
+    "postId": "3",
+    "content": "bài viết rất hay",
+    "createdAt": "2026-01-29T14:38:07.735Z"
+  }
+]
