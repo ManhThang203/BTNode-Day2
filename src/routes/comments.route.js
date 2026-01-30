@@ -1,5 +1,6 @@
+require("module-alias/register");
 const express = require("express");
-const CommentController = require("../controllers/comment.controller");
+const CommentController = require("@/controllers/comment.controller");
 
 const router = express.Router();
 

@@ -12,6 +12,14 @@
   "description": "",
   "dependencies": {
     "cors": "^2.8.6",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "module-alias": "^2.2.3"
+  },
+  "_moduleAliases": {
+    "@": "./src",
+    "@utils": "./utils",
+    "@models": "./src/models",
+    "@controllers": "./src/controllers",
+    "@routes": "./src/routes"
   }
 }

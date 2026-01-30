@@ -7,6 +7,7 @@ const DB_DIR = path.join(__dirname, "..", "db");
 // Function để đảm bảo thư mục db tồn tại
 function ensureDbDir() {
   if (!fs.existsSync(DB_DIR)) {
+    // Tạo thư mục
     fs.mkdirSync(DB_DIR, { recursive: true });
   }
 }

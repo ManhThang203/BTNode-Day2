@@ -1,6 +1,8 @@
+require("module-alias/register");
 const express = require("express");
 const cors = require("cors");
-const routes = require("./src/routes/index");
+const path = require("path");
+const routes = require("@/routes");
 
 const app = express();
 const PORT = 3000;
@@ -13,6 +15,7 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 
 // Mount routes

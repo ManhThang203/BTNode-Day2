@@ -1,4 +1,5 @@
-const { loadDB, saveDB } = require("../../utils/jsonDB");
+require("module-alias/register");
+const { loadDB, saveDB } = require("@utils/jsonDB");
 
 const RESOURCE_NAME = "comments";
 

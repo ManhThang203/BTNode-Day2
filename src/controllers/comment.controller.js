@@ -1,4 +1,5 @@
-const CommentModel = require("../models/comment.model");
+require("module-alias/register");
+const CommentModel = require("@/models/comment.model");
 
 class CommentController {
   static getAllComments(req, res) {

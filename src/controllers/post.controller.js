@@ -1,4 +1,5 @@
-const PostModel = require("../models/post.model");
+require("module-alias/register");
+const PostModel = require("@/models/post.model");
 
 class PostController {
   static getAllPosts(req, res) {
@@ -7,6 +8,7 @@ class PostController {
   }
 
   static getPostById(req, res) {
+    // Lấy các biến trên đường dẫn ở đây là ID
     const { id } = req.params;
     const post = PostModel.getById(id);
 
@@ -18,6 +20,7 @@ class PostController {
   }
 
   static createPost(req, res) {
+    // Chứa dữ liệu gửi lên từ form hoặc JSON
     const { title, content } = req.body;
 
     if (!title || !content) {
@@ -27,6 +30,7 @@ class PostController {
     }
 
     const newPost = PostModel.create({ title, content });
+    // Gửi một đối tượng JSON (phổ biến khi làm API)
     res.status(201).json(newPost);
   }
 

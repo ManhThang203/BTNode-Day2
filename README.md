@@ -51,6 +51,7 @@ npm install
 ```
 
 Lệnh này sẽ cài đặt:
+
 - `express` - Framework web
 - `cors` - Xử lý CORS policy
 
@@ -61,6 +62,7 @@ npm list --depth=0
 ```
 
 Bạn sẽ thấy:
+
 ```
 express-api-project@1.0.0
 ├── cors@2.8.5
@@ -109,23 +111,23 @@ http://localhost:3000/api
 
 ### Posts API
 
-| Method | Endpoint | Description | Body |
-|--------|----------|-------------|------|
-| GET | `/posts` | Lấy tất cả posts | - |
-| GET | `/posts/:id` | Lấy 1 post theo ID | - |
-| POST | `/posts` | Tạo post mới | `{title, content}` |
-| PUT | `/posts/:id` | Cập nhật post | `{title, content}` |
-| DELETE | `/posts/:id` | Xóa post | - |
+| Method | Endpoint     | Description        | Body               |
+| ------ | ------------ | ------------------ | ------------------ |
+| GET    | `/posts`     | Lấy tất cả posts   | -                  |
+| GET    | `/posts/:id` | Lấy 1 post theo ID | -                  |
+| POST   | `/posts`     | Tạo post mới       | `{title, content}` |
+| PUT    | `/posts/:id` | Cập nhật post      | `{title, content}` |
+| DELETE | `/posts/:id` | Xóa post           | -                  |
 
 ### Comments API
 
-| Method | Endpoint | Description | Body |
-|--------|----------|-------------|------|
-| GET | `/comments` | Lấy tất cả comments | - |
-| GET | `/comments/:id` | Lấy 1 comment theo ID | - |
-| POST | `/comments` | Tạo comment mới | `{postId, content}` |
-| PUT | `/comments/:id` | Cập nhật comment | `{content}` |
-| DELETE | `/comments/:id` | Xóa comment | - |
+| Method | Endpoint        | Description           | Body                |
+| ------ | --------------- | --------------------- | ------------------- |
+| GET    | `/comments`     | Lấy tất cả comments   | -                   |
+| GET    | `/comments/:id` | Lấy 1 comment theo ID | -                   |
+| POST   | `/comments`     | Tạo comment mới       | `{postId, content}` |
+| PUT    | `/comments/:id` | Cập nhật comment      | `{content}`         |
+| DELETE | `/comments/:id` | Xóa comment           | -                   |
 
 ---
 
@@ -170,6 +172,7 @@ express-api-project/
 ### 1. Tạo Post mới
 
 **Request:**
+
 ```
 POST http://localhost:3000/api/posts
 Content-Type: application/json
@@ -182,6 +185,7 @@ Body:
 ```
 
 **Response (201):**
+
 ```json
 {
   "id": "1738157123456",
@@ -194,11 +198,13 @@ Body:
 ### 2. Lấy tất cả Posts
 
 **Request:**
+
 ```
 GET http://localhost:3000/api/posts
 ```
 
 **Response (200):**
+
 ```json
 [
   {
@@ -213,6 +219,7 @@ GET http://localhost:3000/api/posts
 ### 3. Tạo Comment
 
 **Request:**
+
 ```
 POST http://localhost:3000/api/comments
 Content-Type: application/json
@@ -225,6 +232,7 @@ Body:
 ```
 
 **Response (201):**
+
 ```json
 {
   "id": "1738157234567",
@@ -237,6 +245,7 @@ Body:
 ### 4. Cập nhật Post
 
 **Request:**
+
 ```
 PUT http://localhost:3000/api/posts/1738157123456
 Content-Type: application/json
@@ -249,6 +258,7 @@ Body:
 ```
 
 **Response (200):**
+
 ```json
 {
   "id": "1738157123456",
@@ -261,11 +271,13 @@ Body:
 ### 5. Xóa Post
 
 **Request:**
+
 ```
 DELETE http://localhost:3000/api/posts/1738157123456
 ```
 
 **Response (204):**
+
 ```
 (No content)
 ```
@@ -275,10 +287,12 @@ DELETE http://localhost:3000/api/posts/1738157123456
 ## ⚙️ CORS Configuration
 
 API đã được cấu hình CORS để cho phép requests từ:
+
 - `http://localhost:5173` (Vite dev server)
 - `https://[your-username].github.io` (GitHub Pages)
 
 Các HTTP methods được phép:
+
 - GET
 - POST
 - PUT
@@ -292,28 +306,32 @@ Các HTTP methods được phép:
 ### Lỗi: `Cannot find module 'express'`
 
 **Giải pháp:**
+
 ```bash
 npm install express cors
 ```
 
 ### Lỗi: `Error: listen EADDRINUSE: address already in use :::3000`
 
-**Giải pháp:** Port 3000 đang được sử dụng. 
+**Giải pháp:** Port 3000 đang được sử dụng.
 
 **Tìm và kill process:**
 
 Mac/Linux:
+
 ```bash
 lsof -ti:3000 | xargs kill -9
 ```
 
 Windows:
+
 ```cmd
 netstat -ano | findstr :3000
 taskkill /PID <PID> /F
 ```
 
 Hoặc đổi port trong `server.js`:
+
 ```javascript
 const PORT = 3001; // Đổi sang port khác
 ```
@@ -321,6 +339,7 @@ const PORT = 3001; // Đổi sang port khác
 ### Lỗi: `404 Not Found` khi gọi API
 
 **Kiểm tra:**
+
 1. Server đã chạy chưa?
 2. URL có đúng format không? `/api/posts` chứ không phải `/posts`
 3. Kiểm tra console log của server
@@ -385,9 +404,9 @@ ISC
 ## ❓ Hỗ trợ
 
 Nếu gặp vấn đề, vui lòng:
+
 1. Kiểm tra lại các bước cài đặt
 2. Đọc phần [Xử lý lỗi](#xử-lý-lỗi)
 3. Tạo issue trên GitHub repository
 
 ---
-
